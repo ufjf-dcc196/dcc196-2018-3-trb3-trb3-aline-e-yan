@@ -176,6 +176,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+
+        LatLng sydney = new LatLng(-21.774964, -43.367273);
+        map.addMarker(new MarkerOptions().position(sydney)
+                .title("Marker na UFJF."));
+        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     /**
