@@ -7,4 +7,13 @@
     <string name="pick_place">Choose a place</string>
     <string name="main_lista_de_estudantes">Lista de Estudantes Cadastrados</string>
     <string name="main_cadastrar_estudante">Cadastrar Estudante</string>
+    <string name="cadastro_estudante_nome" >Nome Completo</string>
+    <string name="cadastro_estudante_cpf">CPF</string>
+    <string name="cadastro_estudante_lista_de_escolas_encontradas">Lista de Escolas Encontradas</string>
+    <string name="cadastro_estudante_pesquisar_escola">Pesquisar Escola</string>
+    <string name="cadastrar_estudante_buscar">Buscar</string>
+    <string name="cadastro_estudante_nome_completo_hint">Digite o nome completo</string>
+    <string name="cadastro_estudante_cpf_hint">Digite o CPF</string>
+    <string name="cadastro_estudante_pesquisar_escola_hint">Digite uma palavra chave</string>
+    <string name="cadastrar_estudante">Cadastrar Estudante</string>
 </resources>
