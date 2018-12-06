@@ -1,4 +1,4 @@
-package trab3.dcc196.ufjf.br.trabalho3;
+package trab3.dcc196.ufjf.br.trabalho3.activities;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import trab3.dcc196.ufjf.br.trabalho3.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
