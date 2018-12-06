@@ -2,16 +2,20 @@ package trab3.dcc196.ufjf.br.trabalho3.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import trab3.dcc196.ufjf.br.trabalho3.R;
+import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterEstudante;
 
 public class CadastroEstudanteActivity extends AppCompatActivity {
 
     private RecyclerView rvListaEscolasEncontradas;
+    private AdapterEstudante adapterEstudante;
 
     private EditText edtNomeCompleto;
     private EditText edtCPF;
@@ -46,5 +50,10 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
 
             }
         });
+
+        rvListaEscolasEncontradas = (RecyclerView) findViewById(R.id.rv_lista_escolas_encontradas);
+        rvListaEscolasEncontradas.setLayoutManager(new LinearLayoutManager(this));
+        //adapterEstudante = new AdapterEstudante(Persistencia.getInstance(getApplicationContext()).selectAllParticipantesCursor());
+        rvListaEscolasEncontradas.setAdapter(adapterEstudante);
     }
 }

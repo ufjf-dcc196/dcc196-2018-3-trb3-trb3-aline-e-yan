@@ -1,5 +1,6 @@
 package trab3.dcc196.ufjf.br.trabalho3.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,8 @@ public class VisualizarEstudanteActivity extends AppCompatActivity {
         btnEditarEstudante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(VisualizarEstudanteActivity.this, CadastroEstudanteActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -44,7 +46,8 @@ public class VisualizarEstudanteActivity extends AppCompatActivity {
         btnVisualizarLocalizacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(VisualizarEstudanteActivity.this, MapsActivity.class);
+                startActivity(intent);
             }
         });
     }
