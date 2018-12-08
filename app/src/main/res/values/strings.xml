@@ -5,7 +5,7 @@
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
-    <string name="lista_de_estudantes">Lista de Estudantes Cadastrados</string>
+    <string name="lista_de_estudantes">Lista de candidatoes Cadastrados</string>
     <string name="cadastrar_estudante">Cadastrar Estudante</string>
     <string name="nome_completo">Nome Completo</string>
     <string name="cpf">CPF</string>

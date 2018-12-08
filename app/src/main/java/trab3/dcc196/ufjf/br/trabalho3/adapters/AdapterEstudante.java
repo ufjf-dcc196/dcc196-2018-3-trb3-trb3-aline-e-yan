@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 
 public class AdapterEstudante extends RecyclerView.Adapter<AdapterEstudante.ViewHolder> {
@@ -16,7 +17,7 @@ public class AdapterEstudante extends RecyclerView.Adapter<AdapterEstudante.View
     private Cursor cursor;
 
     public AdapterEstudante(Cursor c){
-        cursor = c;
+        this.cursor = c;
     }
 
     public void setCursor(Cursor c){
@@ -44,10 +45,10 @@ public class AdapterEstudante extends RecyclerView.Adapter<AdapterEstudante.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterEstudante.ViewHolder viewHolder, int i) {
-        //int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(Trabalho3Contract.Estudante.COLUMN_NAME_NOME_COMPLETO);
-        //cursor.moveToPosition(i);
-        //viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO);
+        cursor.moveToPosition(position);
+        viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
     }
 
     @Override

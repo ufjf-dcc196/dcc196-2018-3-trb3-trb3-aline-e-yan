@@ -6,13 +6,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.database.Cursor;
 
 import java.util.ArrayList;
 
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
-import trab3.dcc196.ufjf.br.trabalho3.models.Estudante;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class CandidatoDAO {
 
@@ -35,8 +34,6 @@ public class CandidatoDAO {
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF, "Escola Estadual Franscisco Bernardino");
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, "1");
         db.insert(CandidatoContract.CandidatoBD.TABLE_NAME,null, valores);
-
-
     }
 
     public void inicializarDBHelper(Context c){
@@ -44,48 +41,48 @@ public class CandidatoDAO {
         }
 
 
-    public Estudante getEstudanteById(int idEstudante){
+    public Candidato getEstudanteById(int idEstudante){
         int indexNomeCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO);
         int indexCPFCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF);
         int indexNomeIDEscola = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA);
         int indexIdEstudante = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD._ID);
-        Estudante CandidatoSolicitado = null;
+        Candidato CandidatoSolicitado = null;
         if(cursor.moveToFirst()) {
-            CandidatoSolicitado = new Estudante();
+            CandidatoSolicitado = new Candidato();
             CandidatoSolicitado.setNome(cursor.getString(indexNomeCandidato))
                     .setCpf(cursor.getString(indexCPFCandidato))
                     .setId_escola(cursor.getInt(indexNomeIDEscola));
         }
         return CandidatoSolicitado;
     }
-    public void atualizarEstudante(Estudante aux) {
+    public void atualizarEstudante(Candidato aux) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("Nome", aux.getNome());
         cv.put("CPF", aux.getCpf());
         cv.put("Escola",aux.getId_escola());
-        db.update("Estudante",cv,
+        db.update("Candidato",cv,
                 "_ID=?",new String[]{String.valueOf(aux.getId())});
     }
-    public ArrayList<Estudante> getEstudantes() {
+    public ArrayList<Candidato> getEstudantes() {
         cursor = getAllEstudantesBanco();
-        ArrayList<Estudante> Estudantes = new ArrayList<>();
+        ArrayList<Candidato> candidatoes = new ArrayList<>();
         int indexNomeCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO);
         int indexCPFCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF);
         int indexNomeIDEscola = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA);
         int indexIdEstudante = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD._ID);
         if(cursor.moveToFirst()){
             do{
-                Estudante temp = new Estudante();
+                Candidato temp = new Candidato();
                 temp.setNome(cursor.getString(indexNomeCandidato))
                         .setCpf(cursor.getString(indexCPFCandidato))
                         .setId_escola(cursor.getInt(indexNomeIDEscola));
-                Estudantes.add(temp);
+                candidatoes.add(temp);
             }while (cursor.moveToNext());
         }
-        return Estudantes;
+        return candidatoes;
     }
-    public void addEstudante(Estudante e){
+    public void addEstudante(Candidato e){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO, e.getNome());
@@ -94,13 +91,13 @@ public class CandidatoDAO {
         db.insert(CandidatoContract.CandidatoBD.TABLE_NAME,null, valores);
 
     }
-    public void removeEstudante(Estudante e) {
+    public void removeEstudante(Candidato e) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rows=db.delete(CandidatoContract.CandidatoBD.TABLE_NAME,
                 "_ID=?",new String[]{String.valueOf(e.getId())});
     }
 
-    public int getIndiceEstudante(Estudante e){
+    public int getIndiceEstudante(Candidato e){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] visao = {
                 CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO,

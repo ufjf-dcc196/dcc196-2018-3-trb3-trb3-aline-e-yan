@@ -13,6 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
         android:text="@string/nome_completo"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -26,18 +27,16 @@
     <EditText
         android:id="@+id/edt_nome_completo"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/nome_completo_hint"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/txt_cpf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nome_completo_titulo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_cpf"
@@ -51,8 +50,7 @@
         app:layout_constraintBottom_toTopOf="@+id/edt_cpf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_nome_completo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_prova"
@@ -63,10 +61,10 @@
         android:text="@string/prova"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edt_prova"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_cpf" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edt_cpf"
@@ -80,8 +78,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_prova"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_cpf" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edt_prova"
@@ -95,8 +92,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_pesquisar_escola"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_prova" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edt_pesquisar_escola"
@@ -110,15 +106,13 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/txt_lista_de_escolas_encontradas"
         app:layout_constraintEnd_toStartOf="@+id/btn_pesquisar_escola"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_pesquisar_escola" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_lista_de_escolas_encontradas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/lista_de_escolas_encontradas"
         android:textSize="18sp"
@@ -126,8 +120,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rv_lista_escolas_encontradas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_pesquisar_escola" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_pesquisar_escola"
@@ -141,8 +134,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_pesquisar_escola"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_prova" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_pesquisar_escola"
@@ -150,10 +142,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/buscar"
+        app:layout_constraintBottom_toTopOf="@+id/txt_lista_de_escolas_encontradas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/edt_pesquisar_escola"
-        app:layout_constraintTop_toBottomOf="@+id/txt_pesquisar_escola" />
+        app:layout_constraintStart_toEndOf="@+id/edt_pesquisar_escola" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lista_escolas_encontradas"
@@ -161,24 +154,21 @@
         android:layout_height="125dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_estudante"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_lista_de_escolas_encontradas" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_cadastrar_estudante"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/cadastrar_estudante"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_lista_escolas_encontradas" />
 </android.support.constraint.ConstraintLayout>

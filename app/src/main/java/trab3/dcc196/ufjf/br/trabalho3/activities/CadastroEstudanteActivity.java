@@ -9,16 +9,19 @@ import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterEstudante;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class CadastroEstudanteActivity extends AppCompatActivity {
 
     private RecyclerView rvListaEscolasEncontradas;
     private AdapterEstudante adapterEstudante;
-
+    private CandidatoDBHelper dbHelper;
     private EditText edtNomeCompleto;
     private EditText edtCPF;
+    private EditText edtProva;
     private EditText edtPesquisarEscola;
 
     private Button btnPesquisarEscola;
@@ -30,16 +33,22 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_estudante);
-
+        dbHelper = new CandidatoDBHelper(getApplicationContext());
         edtNomeCompleto = (EditText) findViewById(R.id.edt_nome_completo);
         edtCPF = (EditText) findViewById(R.id.edt_cpf);
         edtPesquisarEscola = (EditText) findViewById(R.id.edt_pesquisar_escola);
-
+        edtProva = (EditText) findViewById(R.id.edt_prova);
         btnPesquisarEscola = (Button) findViewById(R.id.btn_pesquisar_escola);
         btnPesquisarEscola.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Candidato candidatoAux = new Candidato();
+                candidatoAux.setCpf(edtCPF.getText().toString())
+                        .setProva(edtProva.getText().toString());
+                //pegar da api
+                //            .setId_escola()
+                dbHelper.insercaoCandidatoBanco(candidatoAux);
+                finish();
             }
         });
 
@@ -47,7 +56,13 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
         btnCadastrarEstudante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Candidato candidatoAux = new Candidato();
+                candidatoAux.setCpf(edtCPF.getText().toString())
+                        .setProva(edtProva.getText().toString());
+                //pegar da api
+                //            .setId_escola()
+                dbHelper.insercaoCandidatoBanco(candidatoAux);
+                finish();
             }
         });
 

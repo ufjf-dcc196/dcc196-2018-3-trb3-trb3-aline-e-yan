@@ -1,18 +1,18 @@
 package trab3.dcc196.ufjf.br.trabalho3.models;
 
-public class Estudante {
+public class Candidato {
 
      private  String nome, cpf, prova;
      private  int id_escola, id;
 
-    public Estudante() {
+    public Candidato() {
     }
 
     public String getProva() {
         return prova;
     }
 
-    public Estudante setProva(String prova) {
+    public Candidato setProva(String prova) {
         this.prova = prova;
         return this;
     }
@@ -21,7 +21,7 @@ public class Estudante {
         return nome;
     }
 
-    public Estudante setNome(String nome) {
+    public Candidato setNome(String nome) {
         this.nome = nome;
         return this;
     }
@@ -30,7 +30,7 @@ public class Estudante {
         return cpf;
     }
 
-    public Estudante setCpf(String cpf) {
+    public Candidato setCpf(String cpf) {
         this.cpf = cpf;
         return this;
     }
@@ -39,7 +39,7 @@ public class Estudante {
         return id_escola;
     }
 
-    public Estudante setId_escola(int id_escola) {
+    public Candidato setId_escola(int id_escola) {
         this.id_escola = id_escola;
         return this;
 
@@ -49,7 +49,7 @@ public class Estudante {
         return id;
     }
 
-    public Estudante setId(int id) {
+    public Candidato setId(int id) {
         this.id = id;
         return this;
     }
