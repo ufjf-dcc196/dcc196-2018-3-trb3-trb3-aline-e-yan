@@ -2,11 +2,20 @@ package trab3.dcc196.ufjf.br.trabalho3.models;
 
 public class Escola {
 
-  private String nome, endereco;
+  private String nome, endereco, cidade;
   private int id;
 
     public Escola() {
 
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public Escola setCidade(String cidade) {
+        this.cidade = cidade;
+        return this;
     }
 
     public String getNome() {

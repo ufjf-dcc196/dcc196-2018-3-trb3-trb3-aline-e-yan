@@ -21,4 +21,6 @@
     <string name="editar_estudante" >Editar Estudante</string>
     <string name="visualizar_localizacao">Visualizar Localização</string>
     <string name="estado">Estado</string>
+    <string name="prova">prova</string>
+    <string name="prova_hint">Digite o nome de sua prova</string>
 </resources>

@@ -2,10 +2,19 @@ package trab3.dcc196.ufjf.br.trabalho3.models;
 
 public class Estudante {
 
-     private  String nome, cpf;
+     private  String nome, cpf, prova;
      private  int id_escola, id;
 
     public Estudante() {
+    }
+
+    public String getProva() {
+        return prova;
+    }
+
+    public Estudante setProva(String prova) {
+        this.prova = prova;
+        return this;
     }
 
     public String getNome() {
