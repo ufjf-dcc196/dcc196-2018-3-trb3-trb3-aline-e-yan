@@ -12,11 +12,11 @@ import android.widget.TextView;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 
-public class AdapterEstudante extends RecyclerView.Adapter<AdapterEstudante.ViewHolder> {
+public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.ViewHolder> {
     private OnAdapterEstudanteClickListener listener;
     private Cursor cursor;
 
-    public AdapterEstudante(Cursor c){
+    public AdapterCandidato(Cursor c){
         this.cursor = c;
     }
 
@@ -36,19 +36,21 @@ public class AdapterEstudante extends RecyclerView.Adapter<AdapterEstudante.View
 
     @NonNull
     @Override
-    public AdapterEstudante.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.estudante_layout_item, viewGroup, false);
+        View view = layoutInflater.inflate(R.layout.estudante_layout_item,
+                viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME_CANDIDATO);
+        int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME);
         cursor.moveToPosition(position);
-        viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
+        viewHolder.txtNomeCompleto.setText(cursor.getString(1));
+        System.out.println(">>>>>>>>>>>>>"+columnIndexNomeCompleto +"<<<<<<<<<");
     }
 
     @Override

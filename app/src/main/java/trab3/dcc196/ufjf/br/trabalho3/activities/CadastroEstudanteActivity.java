@@ -5,19 +5,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
+import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
-import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterEstudante;
+import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
 import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class CadastroEstudanteActivity extends AppCompatActivity {
 
     private RecyclerView rvListaEscolasEncontradas;
-    private AdapterEstudante adapterEstudante;
+    private AdapterCandidato adapterEstudante;
     private CandidatoDBHelper dbHelper;
     private EditText edtNomeCompleto;
     private EditText edtCPF;
@@ -42,12 +42,6 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
         btnPesquisarEscola.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Candidato candidatoAux = new Candidato();
-                candidatoAux.setCpf(edtCPF.getText().toString())
-                        .setProva(edtProva.getText().toString());
-                //pegar da api
-                //            .setId_escola()
-                dbHelper.insercaoCandidatoBanco(candidatoAux);
                 finish();
             }
         });
@@ -59,16 +53,15 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
                 Candidato candidatoAux = new Candidato();
                 candidatoAux.setCpf(edtCPF.getText().toString())
                         .setProva(edtProva.getText().toString());
-                //pegar da api
-                //            .setId_escola()
-                dbHelper.insercaoCandidatoBanco(candidatoAux);
+                CandidatoDAO.getInstance(getApplicationContext())
+                        .insercaoCandidatoBanco(candidatoAux);
                 finish();
             }
         });
 
         rvListaEscolasEncontradas = (RecyclerView) findViewById(R.id.rv_lista_escolas_encontradas);
         rvListaEscolasEncontradas.setLayoutManager(new LinearLayoutManager(this));
-        //adapterEstudante = new AdapterEstudante(Persistencia.getInstance(getApplicationContext()).selectAllParticipantesCursor());
+        //adapterEstudante = new AdapterCandidato(Persistencia.getInstance(getApplicationContext()).selectAllParticipantesCursor());
         rvListaEscolasEncontradas.setAdapter(adapterEstudante);
     }
 }

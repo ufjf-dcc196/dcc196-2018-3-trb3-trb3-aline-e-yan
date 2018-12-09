@@ -1,6 +1,5 @@
 package trab3.dcc196.ufjf.br.trabalho3.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
+import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
-import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterEstudante;
+import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CADASTRAR_CANDIDATO = 1;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private CandidatoDBHelper dbHelper;
     private Button btnCadastrarEstudante;
 
-    private AdapterEstudante adapterEstudante;
+    private AdapterCandidato adapterCandidato;
 
     public static final String ESTUDANTE_INDICE = "ESTUDANTE_INDICE";
 
@@ -29,12 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         dbHelper = new CandidatoDBHelper(getApplicationContext());
-        adapterEstudante = new AdapterEstudante(dbHelper.getAllEstudantesBanco());
-        adapterEstudante.setCursor(dbHelper.getAllEstudantesBanco());
-        rvListaEstudantesCadastrados = findViewById(R.id.rv_lista_estudantes_cadastrados);
-        rvListaEstudantesCadastrados.setAdapter(adapterEstudante);
+        rvListaEstudantesCadastrados =(RecyclerView) findViewById(R.id.rv_lista_estudantes_cadastrados);
+
+        adapterCandidato = new AdapterCandidato(
+                CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
+        adapterCandidato.setCursor(
+                CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
+
+        rvListaEstudantesCadastrados.setAdapter(adapterCandidato);
+
         rvListaEstudantesCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
         btnCadastrarEstudante = (Button) findViewById(R.id.btn_cadastrar_estudante);
@@ -43,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CadastroEstudanteActivity.class);
                 startActivity(intent);
+            }
+        });
+        adapterCandidato.setOnAdapterEstudanteClickListener(new AdapterCandidato.OnAdapterEstudanteClickListener() {
+            @Override
+            public void OnAdapterEstudanteClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, VisualizarEstudanteActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void OnAdapterEstudanteClickLong(View view, int position) {
+
             }
         });
     }
