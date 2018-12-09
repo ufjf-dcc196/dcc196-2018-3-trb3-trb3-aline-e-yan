@@ -2,8 +2,17 @@ package trab3.dcc196.ufjf.br.trabalho3.models;
 
 public class Escola {
 
-  private String nome, endereco, cidade;
+  private String nome, endereco, cidade, quantidadesalas;
   private int id;
+
+    public String getQuantidadesalas() {
+        return quantidadesalas;
+    }
+
+    public Escola setQuantidadesalas(String quantidadesalas) {
+        this.quantidadesalas = quantidadesalas;
+        return  this;
+    }
 
     public Escola() {
 
