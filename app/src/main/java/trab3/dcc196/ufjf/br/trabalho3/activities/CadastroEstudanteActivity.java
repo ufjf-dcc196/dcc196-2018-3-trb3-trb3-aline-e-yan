@@ -51,8 +51,10 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Candidato candidatoAux = new Candidato();
-                candidatoAux.setCpf(edtCPF.getText().toString())
-                        .setProva(edtProva.getText().toString());
+                candidatoAux.setNome(edtNomeCompleto.getText().toString())
+                        .setCpf(edtCPF.getText().toString())
+                        .setProva(edtProva.getText().toString())
+                        .setId_escola(1);
                 CandidatoDAO.getInstance(getApplicationContext())
                         .insercaoCandidatoBanco(candidatoAux);
                 finish();

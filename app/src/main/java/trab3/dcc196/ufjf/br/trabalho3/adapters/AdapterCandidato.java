@@ -49,8 +49,8 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME);
         cursor.moveToPosition(position);
-        viewHolder.txtNomeCompleto.setText(cursor.getString(1));
-        System.out.println(">>>>>>>>>>>>>"+columnIndexNomeCompleto +"<<<<<<<<<");
+        viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
+        System.out.println(">>>>>>>>>>>>>"+cursor.getString(columnIndexNomeCompleto) +"<<<<<<<<<");
     }
 
     @Override
@@ -111,5 +111,13 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
             }
             return false;
         }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        int columnIndex = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD._ID);
+        cursor.moveToPosition(position);
+
+        return cursor.getInt(3);
     }
 }

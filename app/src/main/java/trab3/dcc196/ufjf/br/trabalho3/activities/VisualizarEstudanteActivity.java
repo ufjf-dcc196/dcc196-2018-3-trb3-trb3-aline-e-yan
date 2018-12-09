@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class VisualizarEstudanteActivity extends AppCompatActivity {
 
@@ -17,7 +19,7 @@ public class VisualizarEstudanteActivity extends AppCompatActivity {
     private TextView txtEndereco;
     private TextView txtCidade;
     private TextView txtEstado;
-
+    private int idCandidato;
     private Button btnEditarEstudante;
     private Button btnVisualizarLocalizacao;
 
@@ -25,13 +27,20 @@ public class VisualizarEstudanteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_estudante);
-
+        final Intent intent = getIntent();
+        Bundle bundleResult = intent.getExtras();
+        idCandidato = bundleResult.getInt(MainActivity.ID_CANDIDATO);
         txtNomeCompleto = (TextView) findViewById(R.id.txt_nome_completo);
         txtCPF = (TextView) findViewById(R.id.txt_cpf);
         txtNomeEscola = (TextView) findViewById(R.id.txt_nome_escola);
         txtEndereco = (TextView) findViewById(R.id.txt_endereco);
         txtCidade = (TextView) findViewById(R.id.txt_cidade);
         txtEstado = (TextView) findViewById(R.id.txt_estado);
+        Candidato candidatoAux = CandidatoDAO.getInstance(getApplicationContext())
+                .getCandidatoById(idCandidato);
+
+        txtNomeCompleto.setText(candidatoAux.getNome());
+        txtCPF.setText(candidatoAux.getCpf());
 
         btnEditarEstudante = (Button) findViewById(R.id.btn_editar_estudante);
         btnEditarEstudante.setOnClickListener(new View.OnClickListener() {

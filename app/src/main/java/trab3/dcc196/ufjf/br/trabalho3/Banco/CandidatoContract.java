@@ -16,7 +16,7 @@ public class CandidatoContract
                 + CandidatoBD.COLUMN_NAME_NOME+ " TEXT ,"
                 + CandidatoBD.COLUMN_NAME_CPF + " TEXT ,"
                 + CandidatoBD.COLUMN_NAME_PROVA + " TEXT ,"
-                + CandidatoBD.COLUMN_NAME_ID_ESCOLA+ "INTERGER"
+                + CandidatoBD.COLUMN_NAME_ID_ESCOLA+ " TEXT"
                 +")";
         public final static String DROP_CANDIDATO= "DROP TABLE IF EXISTS "+CandidatoBD.TABLE_NAME;
         public final static String DELETE_CANDIDATO= "DELETE FROM" + CandidatoBD.TABLE_NAME+ "WHERE id=" + CandidatoBD._ID;

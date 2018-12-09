@@ -15,8 +15,7 @@ import trab3.dcc196.ufjf.br.trabalho3.R;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_CADASTRAR_CANDIDATO = 1;
-
+    public static final String ID_CANDIDATO = "Posição Participante";
     private RecyclerView rvListaEstudantesCadastrados;
     private CandidatoDBHelper dbHelper;
     private Button btnCadastrarEstudante;
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         rvListaEstudantesCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
+
         btnCadastrarEstudante = (Button) findViewById(R.id.btn_cadastrar_estudante);
         btnCadastrarEstudante.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void OnAdapterEstudanteClick(View view, int position) {
                 Intent intent = new Intent(MainActivity.this, VisualizarEstudanteActivity.class);
+                int idCandidato = (int) adapterCandidato.getItemId(position);
+                intent.putExtra(MainActivity.ID_CANDIDATO, idCandidato);
                 startActivity(intent);
             }
 
