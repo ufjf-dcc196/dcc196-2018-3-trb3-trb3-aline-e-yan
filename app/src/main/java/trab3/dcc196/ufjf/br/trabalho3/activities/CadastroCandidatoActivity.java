@@ -2,8 +2,8 @@ package trab3.dcc196.ufjf.br.trabalho3.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,7 +16,7 @@ import trab3.dcc196.ufjf.br.trabalho3.R;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
 import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
-public class CadastroEstudanteActivity extends AppCompatActivity {
+public class CadastroCandidatoActivity extends AppCompatActivity {
 
     private RecyclerView rvListaEscolasEncontradas;
     private AdapterCandidato adapterEstudante;
@@ -34,7 +34,7 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_estudante);
+        setContentView(R.layout.activity_cadastro_candidato);
         dbHelper = new CandidatoDBHelper(getApplicationContext());
         edtNomeCompleto = (EditText) findViewById(R.id.edt_nome_completo);
         edtCPF = (EditText) findViewById(R.id.edt_cpf);

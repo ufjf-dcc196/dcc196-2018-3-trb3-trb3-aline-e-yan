@@ -5,8 +5,8 @@
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
-    <string name="lista_de_estudantes">Lista de candidatoes Cadastrados</string>
-    <string name="cadastrar_estudante">Cadastrar Estudante</string>
+    <string name="lista_de_candidatos">Lista de candidatos cadastrados</string>
+    <string name="cadastrar_candidato">Cadastrar Candidato</string>
     <string name="nome_completo">Nome Completo</string>
     <string name="cpf">CPF</string>
     <string name="lista_de_escolas_encontradas">Lista de Escolas Encontradas</string>
@@ -18,9 +18,9 @@
     <string name="nome_escola">Nome da Escola</string>
     <string name="endereco">Endereço</string>
     <string name="cidade">Cidade</string>
-    <string name="editar_estudante" >Editar Estudante</string>
+    <string name="editar_candidato">Editar Candidato</string>
     <string name="visualizar_localizacao">Visualizar Localização</string>
     <string name="estado">Estado</string>
-    <string name="prova">prova</string>
+    <string name="prova">Prova</string>
     <string name="prova_hint">Digite o nome de sua prova</string>
 </resources>

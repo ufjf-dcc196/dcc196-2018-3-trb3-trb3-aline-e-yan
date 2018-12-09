@@ -45,8 +45,8 @@
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".activities.CadastroEstudanteActivity" />
-        <activity android:name=".activities.VisualizarEstudanteActivity"></activity>
+        <activity android:name=".activities.CadastroCandidatoActivity" />
+        <activity android:name=".activities.VisualizarCandidatoActivity"></activity>
     </application>
 
 </manifest>

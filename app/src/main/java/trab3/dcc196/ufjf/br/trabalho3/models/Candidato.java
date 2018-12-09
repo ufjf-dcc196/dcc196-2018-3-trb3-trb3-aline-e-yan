@@ -2,8 +2,8 @@ package trab3.dcc196.ufjf.br.trabalho3.models;
 
 public class Candidato {
 
-     private  String nome, cpf, prova;
-     private  int idEscola, id;
+    private String nome, cpf, prova;
+    private int idEscola, id;
 
     public Candidato() {
     }
