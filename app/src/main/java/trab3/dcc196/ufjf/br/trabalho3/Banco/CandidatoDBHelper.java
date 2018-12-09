@@ -13,7 +13,7 @@ public class CandidatoDBHelper extends SQLiteOpenHelper {
 
 
     public final static int DATABASE_VERSION = 1;
-    public final static String DATABASE_NAME = "Candidato.db";
+    public final static String DATABASE_NAME = "CandidatoBD.db";
     public Cursor cursor;
     public CandidatoDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,6 +32,7 @@ public class CandidatoDBHelper extends SQLiteOpenHelper {
         db.execSQL(CandidatoContract.EscolaBD.DROP_ESCOLA);
         onCreate(db);
     }
+
 
 
 

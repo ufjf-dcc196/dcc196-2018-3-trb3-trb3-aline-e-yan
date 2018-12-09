@@ -1,5 +1,7 @@
 package trab3.dcc196.ufjf.br.trabalho3.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -54,9 +56,10 @@ public class CadastroEstudanteActivity extends AppCompatActivity {
                 candidatoAux.setNome(edtNomeCompleto.getText().toString())
                         .setCpf(edtCPF.getText().toString())
                         .setProva(edtProva.getText().toString())
-                        .setId_escola(1);
+                        .setIdEscola(1);
                 CandidatoDAO.getInstance(getApplicationContext())
                         .insercaoCandidatoBanco(candidatoAux);
+                setResult(Activity.RESULT_OK, new Intent());
                 finish();
             }
         });

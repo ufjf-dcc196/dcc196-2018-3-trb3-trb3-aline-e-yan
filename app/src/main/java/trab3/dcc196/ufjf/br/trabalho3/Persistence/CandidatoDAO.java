@@ -5,10 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.ArrayList;
 
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
@@ -37,11 +34,12 @@ public class CandidatoDAO {
     public void insercaoCandidatoBanco(Candidato candidato){
         db = dbHelper.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME,candidato.getNome());
-        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF, candidato.getCpf());
-        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA, candidato.getProva());
-        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, String.valueOf(candidato.getId_escola()));
+        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME,""+candidato.getNome());
+        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF, ""+candidato.getCpf());
+        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA,""+ candidato.getProva());
+        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, candidato.getIdEscola());
         db.insert(CandidatoContract.CandidatoBD.TABLE_NAME,null, valores);
+
 
     }
 
@@ -63,7 +61,7 @@ public class CandidatoDAO {
             CandidatoSolicitado = new Candidato();
             CandidatoSolicitado.setNome(cursor.getString(indexNomeCandidato))
                     .setCpf(cursor.getString(indexCPFCandidato))
-                    .setId_escola(cursor.getInt(indexNomeIDEscola))
+                    .setIdEscola(cursor.getInt(indexNomeIDEscola))
                     .setProva(cursor.getString(indexTipoProva))
                     .setId(indexIdEstudante);
         }
