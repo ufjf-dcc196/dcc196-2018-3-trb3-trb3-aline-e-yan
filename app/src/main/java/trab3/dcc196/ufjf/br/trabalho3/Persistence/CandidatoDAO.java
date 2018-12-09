@@ -67,6 +67,7 @@ public class CandidatoDAO {
         }
         return CandidatoSolicitado;
     }
+
     public Cursor getAllEstudantesBanco() { SQLiteDatabase db2 = dbHelper.getReadableDatabase();
         String MY_QUERY ="select * from "+CandidatoContract.CandidatoBD.TABLE_NAME;
         cursor= db2.rawQuery(MY_QUERY,null);

@@ -11,30 +11,38 @@ import java.util.ArrayList;
 
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 import trab3.dcc196.ufjf.br.trabalho3.models.Escola;
 
 
 public class EscolaDAO {
-    private static EscolaDAO instance = new EscolaDAO();
+    private static EscolaDAO instance;
     private CandidatoDBHelper dbHelper;
+    private SQLiteDatabase db;
     private Cursor cursor;
     private boolean feito = false;
     
-    private EscolaDAO() {
+    private EscolaDAO(Context context) {
+     dbHelper= new CandidatoDBHelper(context);
     }
     
-    public static EscolaDAO getInstance(){
+    public static EscolaDAO getInstance(Context context) {
+        if (instance == null){
+            instance = new EscolaDAO(context);
+        }
         return instance;
     }
 
-    private void insercaoBanco(){
+
+    public void insercaoEscolaBanco(Escola escola){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA, "Escola Estadual Francisco Bernardino");
-        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO, "Rua Sergipe");
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA,"" + escola.getNome());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO,"" + escola.getEndereco());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA, "" + escola.getCidade());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, "" + escola.getQuantidadesalas());
+
         db.insert(CandidatoContract.EscolaBD.TABLE_NAME,null, valores);
-
-
     }
 
     public void inicializarDBHelper(Context c){
@@ -62,6 +70,7 @@ public class EscolaDAO {
         db.update("Escola",cv,
                 "_ID=?",new String[]{String.valueOf(aux.getId())});
     }
+
     public ArrayList<Escola> getEscolas() {
         cursor = getAllEscolasBanco();
         ArrayList<Escola> Escolas = new ArrayList<>();
@@ -84,6 +93,8 @@ public class EscolaDAO {
         ContentValues valores = new ContentValues();
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA, e.getNome());
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO, e.getEndereco());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA, e.getCidade());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, e.getQuantidadesalas());
         db.insert(CandidatoContract.EscolaBD.TABLE_NAME,null, valores);
 
     }
@@ -116,6 +127,8 @@ public class EscolaDAO {
         String[] visao = {
                 CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA,
                 CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO,
+                CandidatoContract.EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA,
+                CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA,
                 CandidatoContract.EscolaBD._ID
         };
         String sort = CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO+ " DESC";
