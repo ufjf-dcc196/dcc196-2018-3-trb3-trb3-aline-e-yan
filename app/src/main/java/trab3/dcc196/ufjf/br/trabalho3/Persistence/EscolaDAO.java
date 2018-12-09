@@ -40,7 +40,7 @@ public class EscolaDAO {
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA,"" + escola.getNome());
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO,"" + escola.getEndereco());
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA, "" + escola.getCidade());
-        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, "" + escola.getQuantidadesalas());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, "" + 0);
 
         db.insert(CandidatoContract.EscolaBD.TABLE_NAME,null, valores);
     }
@@ -94,7 +94,7 @@ public class EscolaDAO {
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_NOME_ESCOLA, e.getNome());
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_ENDERECO, e.getEndereco());
         valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA, e.getCidade());
-        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, e.getQuantidadesalas());
+        valores.put(CandidatoContract.EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA, 0);
         db.insert(CandidatoContract.EscolaBD.TABLE_NAME,null, valores);
 
     }

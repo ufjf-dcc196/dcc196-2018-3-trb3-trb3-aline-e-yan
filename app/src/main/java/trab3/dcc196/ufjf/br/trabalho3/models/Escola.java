@@ -1,29 +1,45 @@
 package trab3.dcc196.ufjf.br.trabalho3.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Escola {
 
-  private String nome, endereco, cidade, quantidadesalas;
-  private int id;
+    private int id;
 
-    public String getQuantidadesalas() {
-        return quantidadesalas;
-    }
-
-    public Escola setQuantidadesalas(String quantidadesalas) {
-        this.quantidadesalas = quantidadesalas;
-        return  this;
-    }
+    @SerializedName("cod")
+    private int cod;
+    @SerializedName("nome")
+    private String nome;
+    @SerializedName("endereco")
+    private String endereco;
+    @SerializedName("cidade")
+    private String cidade;
+    @SerializedName("estado")
+    private String estado;
+    @SerializedName("latitude")
+    private String latitude;
+    @SerializedName("longitude")
+    private String longitude;
 
     public Escola() {
 
     }
 
-    public String getCidade() {
-        return cidade;
+    public int getId() {
+        return id;
     }
 
-    public Escola setCidade(String cidade) {
-        this.cidade = cidade;
+    public Escola setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public int getCod() {
+        return cod;
+    }
+
+    public Escola setCod(int cod) {
+        this.cod = cod;
         return this;
     }
 
@@ -45,12 +61,39 @@ public class Escola {
         return this;
     }
 
-    public int getId() {
-        return id;
+    public String getCidade() {
+        return cidade;
     }
 
-    public Escola setId(int id) {
-        this.id = id;
+    public Escola setCidade(String cidade) {
+        this.cidade = cidade;
+        return this;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public Escola setEstado(String estado) {
+        this.estado = estado;
+        return this;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public Escola setLatitude(String latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public Escola setLongitude(String longitude) {
+        this.longitude = longitude;
         return this;
     }
 }
