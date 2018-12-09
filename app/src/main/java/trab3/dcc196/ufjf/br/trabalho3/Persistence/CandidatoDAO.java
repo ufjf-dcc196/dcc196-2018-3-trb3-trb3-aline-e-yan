@@ -77,6 +77,12 @@ public class CandidatoDAO {
         return cursor;
     }
 
+    public void removeCandidato(Candidato indice){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete("CandidatoBD","_ID=?",new String[]{String.valueOf(indice.getId())});
+    }
+
+
 
 }
 

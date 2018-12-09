@@ -13,6 +13,7 @@ import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
 import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class MainActivity extends AppCompatActivity {
     public static final String ID_CANDIDATO = "Posição Participante";
@@ -58,9 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void OnAdapterEstudanteClickLong(View view, int position) {
+                CandidatoDAO.getInstance(getBaseContext()).removeCandidato();
 
             }
+
+
         });
+
+
+
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
