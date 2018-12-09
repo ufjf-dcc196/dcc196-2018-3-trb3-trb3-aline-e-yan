@@ -12,6 +12,7 @@ import trab3.dcc196.ufjf.br.trabalho3.models.Escola;
 
 public interface EscolaService {
 
+
     @GET("api/escolas?nome={palavraChave}")
     Call<List<Escola>> getEscolas(@Path("palavraChave") String palavraChave);
 

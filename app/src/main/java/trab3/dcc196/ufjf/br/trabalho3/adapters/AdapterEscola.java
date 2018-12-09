@@ -1,7 +1,6 @@
 package trab3.dcc196.ufjf.br.trabalho3.adapters;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,18 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import trab3.dcc196.ufjf.br.trabalho3.R;
+import trab3.dcc196.ufjf.br.trabalho3.models.Escola;
 
 public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder> {
     private OnAdapterEscolaClickListener listener;
-    private Cursor cursor;
+    private ArrayList<Escola> escolas;
 
-    public AdapterEscola(Cursor c){
-        cursor = c;
+    public AdapterEscola(ArrayList<Escola> escolas){
+        this.escolas=escolas;
     }
 
-    public void setCursor(Cursor c){
-        cursor = c;
+    public void setEscolas(ArrayList<Escola> escolas){
+        this.escolas=escolas;
         notifyDataSetChanged();
     }
 
@@ -35,7 +37,7 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
 
     @NonNull
     @Override
-    public AdapterEscola.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.escola_layout_item, viewGroup, false);
@@ -44,23 +46,21 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterEscola.ViewHolder viewHolder, int i) {
-        //int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(Trabalho3Contract.Escola.COLUMN_NAME_NOME_COMPLETO);
-        //cursor.moveToPosition(i);
-        //viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.txtNomeEscola.setText(escolas.get(position).getNome());
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return escolas.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        public TextView txtNomeCompleto;
+        public TextView txtNomeEscola;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txtNomeCompleto = itemView.findViewById(R.id.txt_nome);
+            txtNomeEscola = itemView.findViewById(R.id.txt_nome);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
