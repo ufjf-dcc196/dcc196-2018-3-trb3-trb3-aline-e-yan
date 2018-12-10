@@ -59,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void OnAdapterEstudanteClickLong(View view, int position) {
-                CandidatoDAO.getInstance(getBaseContext()).removeCandidato();
+                int idCandidato = (int) adapterCandidato.getItemId(position);
+
+                CandidatoDAO.getInstance(getBaseContext()).removeCandidato(
+                       idCandidato);
+                adapterCandidato.setCursor(
+                        CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
+                adapterCandidato.notifyItemRemoved(position);
 
             }
 
@@ -70,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 

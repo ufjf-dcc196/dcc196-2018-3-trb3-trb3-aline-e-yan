@@ -77,9 +77,9 @@ public class CandidatoDAO {
         return cursor;
     }
 
-    public void removeCandidato(Candidato indice){
+    public void removeCandidato(int indice){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete("CandidatoBD","_ID=?",new String[]{String.valueOf(indice.getId())});
+        db.delete(CandidatoContract.CandidatoBD.TABLE_NAME,"_ID="+indice,null);
     }
 
 
