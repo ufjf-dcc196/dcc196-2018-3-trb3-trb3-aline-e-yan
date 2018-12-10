@@ -3,7 +3,7 @@ package trab3.dcc196.ufjf.br.trabalho3.models;
 public class Candidato {
 
     private String nome, cpf, prova;
-    private int idEscola, id;
+    private int codEscola, id;
 
     public Candidato() {
     }
@@ -35,12 +35,12 @@ public class Candidato {
         return this;
     }
 
-    public int getIdEscola() {
-        return idEscola;
+    public int getCodEscola() {
+        return codEscola;
     }
 
-    public Candidato setIdEscola(int idEscola) {
-        this.idEscola = idEscola;
+    public Candidato setCodEscola(int codEscola) {
+        this.codEscola = codEscola;
         return this;
 
     }

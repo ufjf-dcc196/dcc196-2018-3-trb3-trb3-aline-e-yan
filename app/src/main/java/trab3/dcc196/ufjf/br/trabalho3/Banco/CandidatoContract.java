@@ -25,23 +25,4 @@ public class CandidatoContract
 
     }
 
-    public final class EscolaBD implements BaseColumns {
-        public final static String TABLE_NAME = "Escola";
-        public final static String COLUMN_NAME_NOME_ESCOLA = "NOME_ESCOLA";
-        public final static String COLUMN_NAME_MUNICIPIO_ESCOLA = "MUNICIPIO_ESCOLA";
-        public final static String COLUMN_NAME_ENDERECO= "ENDERECO";
-        public final static String COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA= "QUANTIDADE_SALAS";
-
-        public final static String CREATE_ESCOLA  = "CREATE TABLE "+EscolaBD.TABLE_NAME+" ("
-                + EscolaBD._ID + " INTEGER PRIMARY KEY, "
-                + EscolaBD.COLUMN_NAME_NOME_ESCOLA + " TEXT ,"
-                + EscolaBD.COLUMN_NAME_MUNICIPIO_ESCOLA + " TEXT ,"
-                + EscolaBD.COLUMN_NAME_QUANTIDADE_SALAS_ESCOLA + " INTEGER ,"
-                + EscolaBD.COLUMN_NAME_ENDERECO+ " TEXT"
-
-                +")";
-        public final static String DROP_ESCOLA = "DROP TABLE IF EXISTS "+EscolaBD.TABLE_NAME;
-
-    }
-
 }

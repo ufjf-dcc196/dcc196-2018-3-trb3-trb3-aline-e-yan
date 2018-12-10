@@ -1,6 +1,7 @@
 package trab3.dcc196.ufjf.br.trabalho3.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -34,13 +35,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
+import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
+import trab3.dcc196.ufjf.br.trabalho3.models.Escola;
+import trab3.dcc196.ufjf.br.trabalho3.services.EscolaService;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
+    private int idCandidato;
 
     // The entry points to the Places API.
     private GeoDataClient mGeoDataClient;
@@ -75,6 +86,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Intent intent = getIntent();
+        Bundle bundleResult = intent.getExtras();
+        idCandidato = bundleResult.getInt(MainActivity.ID_CANDIDATO);
+
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
@@ -179,10 +194,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
 
-        LatLng sydney = new LatLng(-21.774964, -43.367273);
-        map.addMarker(new MarkerOptions().position(sydney)
+        Candidato candidatoAux = CandidatoDAO.
+                getInstance(getApplicationContext()).getCandidatoById(idCandidato);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://educacao.dadosabertosbr.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        EscolaService escolaService = retrofit.create(EscolaService.class);
+        Call<Escola> escola = escolaService.getEscolaByCod("31068331");
+        final double[] latitude = new double[1];
+        final double[] longitude = new double[1];
+        escola.enqueue(new Callback<Escola>() {
+            @Override
+            public void onResponse(Call<Escola> call, Response<Escola> response) {
+                Escola escolaResponse = response.body();
+                latitude[0] = escolaResponse.getLatitude();
+                longitude[0] = escolaResponse.getLongitude();
+                Log.i("SERVIÇO", "Escola: " + escolaResponse.getNome());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Escola> call, @NonNull Throwable t) {
+                Log.i("SERVIÇO", "Falha: "+t.getMessage());
+            }
+        });
+        LatLng localProva = new LatLng(latitude[0],
+                longitude[0]);
+        map.addMarker(new MarkerOptions().position(localProva)
                 .title("Marker na UFJF."));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        map.moveCamera(CameraUpdateFactory.newLatLng(localProva));
+
+
     }
 
     /**

@@ -37,7 +37,7 @@ public class CandidatoDAO {
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME,""+candidato.getNome());
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF, ""+candidato.getCpf());
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA,""+ candidato.getProva());
-        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, candidato.getIdEscola());
+        valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, candidato.getCodEscola());
         db.insert(CandidatoContract.CandidatoBD.TABLE_NAME,null, valores);
 
 
@@ -61,7 +61,7 @@ public class CandidatoDAO {
             CandidatoSolicitado = new Candidato();
             CandidatoSolicitado.setNome(cursor.getString(indexNomeCandidato))
                     .setCpf(cursor.getString(indexCPFCandidato))
-                    .setIdEscola(cursor.getInt(indexNomeIDEscola))
+                    .setCodEscola(31068331)
                     .setProva(cursor.getString(indexTipoProva))
                     .setId(indexIdCandidato);
         }
