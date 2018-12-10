@@ -14,8 +14,12 @@ public class Escola {
     private String endereco;
     @SerializedName("cidade")
     private String cidade;
+    @SerializedName("nomeDistrito")
+    private String nomeDistrito;
     @SerializedName("estado")
     private String estado;
+    @SerializedName("siglaUf")
+    private String siglaUf;
     @SerializedName("latitude")
     private Double latitude;
     @SerializedName("longitude")
@@ -94,6 +98,24 @@ public class Escola {
 
     public Escola setLongitude(Double longitude) {
         this.longitude = longitude;
+        return this;
+    }
+
+    public String getNomeDistrito() {
+        return nomeDistrito;
+    }
+
+    public Escola setNomeDistrito(String nomeDistrito) {
+        this.nomeDistrito = nomeDistrito;
+        return this;
+    }
+
+    public String getSiglaUf() {
+        return siglaUf;
+    }
+
+    public Escola setSiglaUf(String siglaUf) {
+        this.siglaUf = siglaUf;
         return this;
     }
 }

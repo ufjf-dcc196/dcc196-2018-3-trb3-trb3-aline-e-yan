@@ -112,6 +112,8 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
             @Override
             public void OnAdapterEscolaClick(View view, int position) {
                 escolaEscolhida = (Escola) adapterEscola.getEscolas().get(position);
+                Log.i("SERVIÇO", "positionnnnnnnnnnnnn: " + position);
+                Log.i("SERVIÇO", "ESCOLAAAAAAAAAAA: " + escolaEscolhida.getNome() + escolaEscolhida.getCod());
                 Toast t = Toast.makeText(getApplicationContext(), "Selecionada para cadastro a escola " + escolaEscolhida.getNome() + " (COD: " + escolaEscolhida.getCod() + ")", Toast.LENGTH_LONG);
                 t.show();
             }
@@ -130,7 +132,7 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
                 candidatoAux.setNome(edtNomeCompleto.getText().toString())
                         .setCpf(edtCPF.getText().toString())
                         .setProva(edtProva.getText().toString())
-                        .setCodEscola(1);
+                        .setCodEscola(Integer.parseInt(escolaEscolhida.getCod()));
                 CandidatoDAO.getInstance(getApplicationContext())
                         .insercaoCandidatoBanco(candidatoAux);
                 setResult(Activity.RESULT_OK, new Intent());

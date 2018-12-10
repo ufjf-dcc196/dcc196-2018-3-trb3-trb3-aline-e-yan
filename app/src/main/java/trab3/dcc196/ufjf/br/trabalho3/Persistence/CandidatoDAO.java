@@ -61,7 +61,7 @@ public class CandidatoDAO {
             CandidatoSolicitado = new Candidato();
             CandidatoSolicitado.setNome(cursor.getString(indexNomeCandidato))
                     .setCpf(cursor.getString(indexCPFCandidato))
-                    .setCodEscola(31068331)
+                    .setCodEscola(cursor.getInt(indexNomeIDEscola))
                     .setProva(cursor.getString(indexTipoProva))
                     .setId(indexIdCandidato);
         }

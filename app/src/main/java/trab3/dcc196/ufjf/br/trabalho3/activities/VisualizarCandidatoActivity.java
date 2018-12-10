@@ -41,7 +41,7 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
         idCandidato = bundleResult.getInt(MainActivity.ID_CANDIDATO);
-        txtNomeCompleto = (TextView) findViewById(R.id.txt_nome_completo);
+        txtNomeCompleto = (TextView) findViewById(R.id.txt_nome);
         txtCPF = (TextView) findViewById(R.id.txt_cpf);
         txtProva = (TextView) findViewById(R.id.txt_prova);
         txtNomeEscola = (TextView) findViewById(R.id.txt_nome_escola);
@@ -81,7 +81,7 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
                 .build();
 
         EscolaService escolaService = retrofit.create(EscolaService.class);
-        Call<Escola> escola = escolaService.getEscolaByCod("31068331");
+        Call<Escola> escola = escolaService.getEscolaByCod(String.valueOf(candidatoAux.getCodEscola()));
         escola.enqueue(new Callback<Escola>() {
             @Override
             public void onResponse(Call<Escola> call, Response<Escola> response) {
@@ -89,8 +89,8 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
                 txtNomeEscola.setText(escolaResponse.getNome());
                 txtCod.setText(escolaResponse.getCod());
                 txtEndereco.setText(escolaResponse.getEndereco());
-                txtCidade.setText(escolaResponse.getCidade());
-                txtEstado.setText(escolaResponse.getEstado());
+                txtCidade.setText(escolaResponse.getNomeDistrito());
+                txtEstado.setText(escolaResponse.getSiglaUf());
             }
 
             @Override

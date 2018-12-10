@@ -43,8 +43,10 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME);
+        int columnIndexCPF = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF);
         cursor.moveToPosition(position);
         viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
+        viewHolder.txtCPF.setText(cursor.getString(columnIndexCPF));
     }
 
     @Override
@@ -68,10 +70,12 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public TextView txtNomeCompleto;
+        public TextView txtCPF;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txtNomeCompleto = itemView.findViewById(R.id.txt_nome_completo);
+            txtNomeCompleto = itemView.findViewById(R.id.txt_nome);
+            txtCPF = itemView.findViewById(R.id.txt_cpf);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -21,7 +21,6 @@ public class CandidatoDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CandidatoContract.CandidatoBD.CREATE_CANDIDATO);
-        db.execSQL(CandidatoContract.EscolaBD.CREATE_ESCOLA);
     }
 
     @Override
@@ -29,7 +28,6 @@ public class CandidatoDBHelper extends SQLiteOpenHelper {
 
         db.execSQL(CandidatoContract.CandidatoBD.DROP_CANDIDATO);
         db.execSQL(CandidatoContract.CandidatoBD.DELETE_CANDIDATO);
-        db.execSQL(CandidatoContract.EscolaBD.DROP_ESCOLA);
         onCreate(db);
     }
 
