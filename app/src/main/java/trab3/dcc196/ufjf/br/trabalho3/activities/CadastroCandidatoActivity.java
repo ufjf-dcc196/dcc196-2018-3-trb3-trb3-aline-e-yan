@@ -19,11 +19,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Query;
 import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
 import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
-import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterEscola;
 import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 import trab3.dcc196.ufjf.br.trabalho3.models.Escola;
@@ -97,7 +95,7 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
                 candidatoAux.setNome(edtNomeCompleto.getText().toString())
                         .setCpf(edtCPF.getText().toString())
                         .setProva(edtProva.getText().toString())
-                        .setIdEscola(1);
+                        .setCodEscola(1);
                 CandidatoDAO.getInstance(getApplicationContext())
                         .insercaoCandidatoBanco(candidatoAux);
                 setResult(Activity.RESULT_OK, new Intent());
