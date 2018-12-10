@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/txt_nome_completo_titulo"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/edt_nome_completo"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -42,7 +42,7 @@
     <TextView
         android:id="@+id/txt_cpf"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -58,7 +58,7 @@
     <TextView
         android:id="@+id/txt_prova_titulo"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -74,7 +74,7 @@
     <EditText
         android:id="@+id/edt_cpf"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -90,7 +90,7 @@
     <EditText
         android:id="@+id/edt_prova"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -121,7 +121,7 @@
     <TextView
         android:id="@+id/txt_lista_de_escolas_encontradas"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -137,7 +137,7 @@
     <TextView
         android:id="@+id/txt_pesquisar_escola"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -153,7 +153,7 @@
     <Button
         android:id="@+id/btn_pesquisar_escola"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -165,25 +165,27 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lista_escolas_encontradas"
-        android:layout_width="368dp"
-        android:layout_height="125dp"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_estudante"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_candidato"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_lista_de_escolas_encontradas" />
 
     <Button
-        android:id="@+id/btn_cadastrar_estudante"
+        android:id="@+id/btn_cadastrar_candidato"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/cadastrar_candidato"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

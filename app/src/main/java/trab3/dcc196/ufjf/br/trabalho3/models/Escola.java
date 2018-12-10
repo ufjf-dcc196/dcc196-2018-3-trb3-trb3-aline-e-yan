@@ -7,7 +7,7 @@ public class Escola {
     private int id;
 
     @SerializedName("cod")
-    private int cod;
+    private String cod;
     @SerializedName("nome")
     private String nome;
     @SerializedName("endereco")
@@ -34,11 +34,11 @@ public class Escola {
         return this;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
-    public Escola setCod(int cod) {
+    public Escola setCod(String cod) {
         this.cod = cod;
         return this;
     }

@@ -55,7 +55,7 @@ public class CandidatoDAO {
         int indexCPFCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF);
         int indexTipoProva = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA);
         int indexNomeIDEscola = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA);
-        int indexIdEstudante = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD._ID);
+        int indexIdCandidato = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD._ID);
         Candidato CandidatoSolicitado = null;
         if(cursor.moveToFirst()) {
             CandidatoSolicitado = new Candidato();
@@ -63,12 +63,12 @@ public class CandidatoDAO {
                     .setCpf(cursor.getString(indexCPFCandidato))
                     .setIdEscola(cursor.getInt(indexNomeIDEscola))
                     .setProva(cursor.getString(indexTipoProva))
-                    .setId(indexIdEstudante);
+                    .setId(indexIdCandidato);
         }
         return CandidatoSolicitado;
     }
 
-    public Cursor getAllEstudantesBanco() {
+    public Cursor getAllCandidatosBanco() {
         SQLiteDatabase db2 = dbHelper.getReadableDatabase();
         String MY_QUERY ="select * from "+CandidatoContract.CandidatoBD.TABLE_NAME;
         cursor = db2.rawQuery(MY_QUERY,null);

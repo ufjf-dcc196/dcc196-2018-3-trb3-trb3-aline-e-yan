@@ -22,16 +22,20 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
     }
 
     public void setEscolas(ArrayList<Escola> escolas){
-        this.escolas=escolas;
+        this.escolas = escolas;
         notifyDataSetChanged();
+    }
+
+    public ArrayList<Escola> getEscolas() {
+        return this.escolas;
     }
 
     public interface OnAdapterEscolaClickListener {
         void OnAdapterEscolaClick(View view, int position);
-        void OnAdapterEstudanteClickLong(View view, int position);
+        void OnAdapterEscolaClickLong(View view, int position);
     }
 
-    public void setOnAdapterEstudanteClickListener(OnAdapterEscolaClickListener listener) {
+    public void setOnAdapterCandidatoClickListener(OnAdapterEscolaClickListener listener) {
         this.listener = listener;
     }
 
@@ -47,7 +51,14 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.txtNomeEscola.setText(escolas.get(position).getNome());
+        holder.txtNome.setText(escolas.get(position).getNome());
+        holder.txtCod.setText(escolas.get(position).getCod());
+        if (holder.txtCidade != null && escolas.get(position).getCidade() != null) {
+            holder.txtCidade.setText(escolas.get(position).getCidade());
+        }
+        if (holder.txtEstado != null && escolas.get(position).getEstado() != null) {
+            holder.txtEstado.setText(escolas.get(position).getEstado());
+        }
     }
 
     @Override
@@ -56,11 +67,17 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        public TextView txtNomeEscola;
+        public TextView txtNome;
+        public TextView txtCod;
+        public TextView txtCidade;
+        public TextView txtEstado;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txtNomeEscola = itemView.findViewById(R.id.txt_nome);
+            txtNome = itemView.findViewById(R.id.txt_nome);
+            txtCod = itemView.findViewById(R.id.txt_cod);
+            txtCidade = itemView.findViewById(R.id.txt_cidade);
+            txtEstado = itemView.findViewById(R.id.txt_estado);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,7 +97,7 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
                     if (listener != null) {
                         int adapterPosition = getAdapterPosition();
                         if (adapterPosition != RecyclerView.NO_POSITION) {
-                            listener.OnAdapterEstudanteClickLong(v, adapterPosition);
+                            listener.OnAdapterEscolaClickLong(v, adapterPosition);
                         }
                     }
                     return false;
@@ -103,7 +120,7 @@ public class AdapterEscola extends RecyclerView.Adapter<AdapterEscola.ViewHolder
             if (listener != null) {
                 int adapterPosition = getAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    listener.OnAdapterEstudanteClickLong(v, adapterPosition);
+                    listener.OnAdapterEscolaClickLong(v, adapterPosition);
                 }
             }
             return false;

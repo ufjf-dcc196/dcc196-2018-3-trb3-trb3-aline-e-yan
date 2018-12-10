@@ -18,10 +18,10 @@ import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 public class MainActivity extends AppCompatActivity {
     public static final String ID_CANDIDATO = "Posição Participante";
     public static final int CADASTRO = 1;
-    public static final String ESTUDANTE_INDICE = "ESTUDANTE_INDICE";
-    private RecyclerView rvListaEstudantesCadastrados;
+    public static final String CANDIDATO_INDICE = "CANDIDATO_INDICE";
+    private RecyclerView rvListaCandidatosCadastrados;
     private CandidatoDBHelper dbHelper;
-    private Button btnCadastrarEstudante;
+    private Button btnCadastrarCandidato;
     private AdapterCandidato adapterCandidato;
 
     @Override
@@ -31,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new CandidatoDBHelper(getApplicationContext());
 
-        rvListaEstudantesCadastrados = (RecyclerView) findViewById(R.id.rv_lista_estudantes_cadastrados);
+        rvListaCandidatosCadastrados = (RecyclerView) findViewById(R.id.rv_lista_candidatos_cadastrados);
         adapterCandidato = new AdapterCandidato(
-                CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
+                CandidatoDAO.getInstance(getApplicationContext()).getAllCandidatosBanco());
         adapterCandidato.setCursor(
-                CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
-        rvListaEstudantesCadastrados.setAdapter(adapterCandidato);
-        rvListaEstudantesCadastrados.setLayoutManager(new LinearLayoutManager(this));
+                CandidatoDAO.getInstance(getApplicationContext()).getAllCandidatosBanco());
+        rvListaCandidatosCadastrados.setAdapter(adapterCandidato);
+        rvListaCandidatosCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
-        btnCadastrarEstudante = (Button) findViewById(R.id.btn_cadastrar_estudante);
-        btnCadastrarEstudante.setOnClickListener(new View.OnClickListener() {
+        btnCadastrarCandidato = (Button) findViewById(R.id.btn_cadastrar_candidato);
+        btnCadastrarCandidato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CadastroCandidatoActivity.class);
@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapterCandidato.setOnAdapterEstudanteClickListener(new AdapterCandidato.OnAdapterEstudanteClickListener() {
+        adapterCandidato.setOnAdapterCandidatoClickListener(new AdapterCandidato.OnAdapterCandidatoClickListener() {
             @Override
-            public void OnAdapterEstudanteClick(View view, int position) {
+            public void OnAdapterCandidatoClick(View view, int position) {
                 Intent intent = new Intent(MainActivity.this, VisualizarCandidatoActivity.class);
                 int idCandidato = (int) adapterCandidato.getItemId(position);
                 intent.putExtra(MainActivity.ID_CANDIDATO, idCandidato);
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void OnAdapterEstudanteClickLong(View view, int position) {
+            public void OnAdapterCandidatoClickLong(View view, int position) {
                 int idCandidato = (int) adapterCandidato.getItemId(position);
 
                 CandidatoDAO.getInstance(getBaseContext()).removeCandidato(
                        idCandidato);
                 adapterCandidato.setCursor(
-                        CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
+                        CandidatoDAO.getInstance(getApplicationContext()).getAllCandidatosBanco());
                 adapterCandidato.notifyItemRemoved(position);
 
             }
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == MainActivity.CADASTRO && resultCode == Activity.RESULT_OK && data != null) {
             adapterCandidato.setCursor(
-                    CandidatoDAO.getInstance(getApplicationContext()).getAllEstudantesBanco());
-            rvListaEstudantesCadastrados.setAdapter(adapterCandidato);
+                    CandidatoDAO.getInstance(getApplicationContext()).getAllCandidatosBanco());
+            rvListaCandidatosCadastrados.setAdapter(adapterCandidato);
             adapterCandidato.notifyDataSetChanged();
         }
     }

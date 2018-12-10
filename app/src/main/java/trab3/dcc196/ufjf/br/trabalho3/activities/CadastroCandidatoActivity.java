@@ -10,9 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.internal.LinkedTreeMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +46,9 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
     private EditText edtProva;
     private EditText edtPesquisarEscola;
     private Button btnPesquisarEscola;
-    private Button btnCadastrarEstudante;
+    private Button btnCadastrarCandidato;
+
+    private Escola escolaEscolhida;
 
     private AdapterEscola adapterEscola;
 
@@ -59,6 +68,7 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
         rvListaEscolasEncontradas = (RecyclerView) findViewById(R.id.rv_lista_escolas_encontradas);
         rvListaEscolasEncontradas.setLayoutManager(new LinearLayoutManager(this));
         rvListaEscolasEncontradas.setAdapter(adapterEscola);
+
         btnPesquisarEscola.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,29 +78,54 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
                         .build();
                 EscolaService escolaService = retrofit.create(EscolaService.class);
 
-                Call<List<Escola>> escola = escolaService.
+                Call<List<Object>> escolas = escolaService.
                         getEscolas(edtPesquisarEscola.getText().toString());
-
-                escola.enqueue(new Callback<List<Escola>>() {
+                escolas.enqueue(new Callback<List<Object>>() {
                     @Override
-                    public void onResponse(Call<List<Escola>> call, Response<List<Escola>> response) {
-                        for(Escola escolaResponse: response.body()){
-                            Log.i("SERVIÇO", "Escolas: "+escolaResponse.getNome());
+                    public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+                        Log.i("SERVIÇO", "Escolas:::> " + response.body().toString());
+                        ArrayList<Escola> escolas = new ArrayList<>();
+                        for(Object objeto : ((List) response.body().get(1))){
+                            if (objeto instanceof Double) {
+                                Log.i("SERVIÇO", "PULANDO O NÚMERO DE OBJETOS RETORNADOS: " + String.valueOf((Double) objeto));
+                                continue;
+                            }
+
+                            Escola escola = new Escola();
+                            escola.setCod(String.valueOf(((Double)((LinkedTreeMap) objeto).get("cod")).intValue()));
+                            escola.setNome(((LinkedTreeMap) objeto).get("nome").toString());
+                            escola.setCidade(((LinkedTreeMap) objeto).get("cidade").toString());
+                            escola.setEstado(((LinkedTreeMap) objeto).get("estado").toString());
+                            escolas.add(escola);
                         }
-                        adapterEscola.setEscolas((ArrayList<Escola>) response.body());
+                        adapterEscola.setEscolas(escolas);
                         adapterEscola.notifyDataSetChanged();
                     }
+
                     @Override
-                    public void onFailure(Call<List<Escola>> call, Throwable t) {
-                        Log.i("SERVIÇO", "Falha: "+t.getMessage());
+                    public void onFailure(Call<List<Object>> call, Throwable t) {
+                        Log.i("SERVIÇO", "Falha::: " + t.getMessage());
                     }
                 });
+            }
+        });
+
+        adapterEscola.setOnAdapterCandidatoClickListener(new AdapterEscola.OnAdapterEscolaClickListener() {
+            @Override
+            public void OnAdapterEscolaClick(View view, int position) {
+                escolaEscolhida = (Escola) adapterEscola.getEscolas().get(position);
+                Toast t = Toast.makeText(getApplicationContext(), "Selecionada para cadastro a escola " + escolaEscolhida.getNome() + " (COD: " + escolaEscolhida.getCod() + ")", Toast.LENGTH_LONG);
+                t.show();
+            }
+
+            @Override
+            public void OnAdapterEscolaClickLong(View view, int position) {
 
             }
         });
 
-        btnCadastrarEstudante = (Button) findViewById(R.id.btn_cadastrar_estudante);
-        btnCadastrarEstudante.setOnClickListener(new View.OnClickListener() {
+        btnCadastrarCandidato = (Button) findViewById(R.id.btn_cadastrar_candidato);
+        btnCadastrarCandidato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Candidato candidatoAux = new Candidato();
@@ -104,6 +139,5 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

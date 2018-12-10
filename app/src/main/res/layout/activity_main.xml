@@ -7,14 +7,14 @@
     tools:context=".activities.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_lista_estudantes_cadastrados"
+        android:id="@+id/rv_lista_candidatos_cadastrados"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_estudante"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cadastrar_candidato"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,13 +31,13 @@
         android:text="@string/lista_de_candidatos"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rv_lista_estudantes_cadastrados"
+        app:layout_constraintBottom_toTopOf="@+id/rv_lista_candidatos_cadastrados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_cadastrar_estudante"
+        android:id="@+id/btn_cadastrar_candidato"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -48,5 +48,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_lista_estudantes_cadastrados" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_lista_candidatos_cadastrados" />
 </android.support.constraint.ConstraintLayout>

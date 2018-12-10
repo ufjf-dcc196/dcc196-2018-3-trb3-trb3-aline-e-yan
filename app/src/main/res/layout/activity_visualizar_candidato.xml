@@ -72,7 +72,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txt_nome_escola"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_cod_titulo"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_prova" />
 
@@ -84,7 +85,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/txt_endereco_titulo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_cod"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_nome_escola_titulo" />
 
@@ -126,7 +127,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txt_cidade"
-        app:layout_constraintEnd_toStartOf="@+id/txt_estado_titulo"
+        app:layout_constraintEnd_toStartOf="@+id/txt_estado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_endereco" />
 
@@ -137,7 +138,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_editar_estudante"
+        app:layout_constraintBottom_toTopOf="@+id/btn_editar_candidato"
         app:layout_constraintEnd_toStartOf="@+id/txt_estado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_cidade_titulo" />
@@ -155,8 +156,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txt_estado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_cidade_titulo"
-        app:layout_constraintTop_toBottomOf="@+id/txt_endereco"
-        app:layout_constraintVertical_bias="0.403" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_endereco" />
 
     <TextView
         android:id="@+id/txt_estado"
@@ -165,13 +165,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_editar_estudante"
+        app:layout_constraintBottom_toTopOf="@+id/btn_editar_candidato"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txt_cidade"
         app:layout_constraintTop_toBottomOf="@+id/txt_estado_titulo" />
 
     <Button
-        android:id="@+id/btn_editar_estudante"
+        android:id="@+id/btn_editar_candidato"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -191,10 +191,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/visualizar_localizacao"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_editar_estudante" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_editar_candidato" />
 
     <TextView
         android:id="@+id/txt_prova_titulo"
@@ -223,4 +225,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_prova_titulo" />
+
+    <TextView
+        android:id="@+id/txt_cod_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/codigo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txt_cod"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_nome_escola_titulo"
+        app:layout_constraintTop_toBottomOf="@+id/txt_prova" />
+
+    <TextView
+        android:id="@+id/txt_cod"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_endereco_titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_nome_escola"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nome_escola_titulo" />
 </android.support.constraint.ConstraintLayout>

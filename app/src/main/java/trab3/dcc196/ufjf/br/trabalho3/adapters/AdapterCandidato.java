@@ -13,7 +13,7 @@ import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoContract;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 
 public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.ViewHolder> {
-    private OnAdapterEstudanteClickListener listener;
+    private OnAdapterCandidatoClickListener listener;
     private Cursor cursor;
 
     public AdapterCandidato(Cursor c) {
@@ -25,7 +25,7 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
         notifyDataSetChanged();
     }
 
-    public void setOnAdapterEstudanteClickListener(OnAdapterEstudanteClickListener listener) {
+    public void setOnAdapterCandidatoClickListener(OnAdapterCandidatoClickListener listener) {
         this.listener = listener;
     }
 
@@ -45,7 +45,6 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
         int columnIndexNomeCompleto = cursor.getColumnIndexOrThrow(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME);
         cursor.moveToPosition(position);
         viewHolder.txtNomeCompleto.setText(cursor.getString(columnIndexNomeCompleto));
-        System.out.println(">>>>>>>>>>>>>" + cursor.getString(columnIndexNomeCompleto) + "<<<<<<<<<");
     }
 
     @Override
@@ -61,10 +60,10 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
         return cursor.getInt(cursor.getColumnIndex(CandidatoContract.CandidatoBD._ID));
     }
 
-    public interface OnAdapterEstudanteClickListener {
-        void OnAdapterEstudanteClick(View view, int position);
+    public interface OnAdapterCandidatoClickListener {
+        void OnAdapterCandidatoClick(View view, int position);
 
-        void OnAdapterEstudanteClickLong(View view, int position);
+        void OnAdapterCandidatoClickLong(View view, int position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -80,7 +79,7 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
                     if (listener != null) {
                         int adapterPosition = getAdapterPosition();
                         if (adapterPosition != RecyclerView.NO_POSITION) {
-                            listener.OnAdapterEstudanteClick(v, adapterPosition);
+                            listener.OnAdapterCandidatoClick(v, adapterPosition);
                         }
                     }
                 }
@@ -92,7 +91,7 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
                     if (listener != null) {
                         int adapterPosition = getAdapterPosition();
                         if (adapterPosition != RecyclerView.NO_POSITION) {
-                            listener.OnAdapterEstudanteClickLong(v, adapterPosition);
+                            listener.OnAdapterCandidatoClickLong(v, adapterPosition);
                         }
                     }
                     return false;
@@ -105,7 +104,7 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
             if (listener != null) {
                 int adapterPosition = getAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    listener.OnAdapterEstudanteClick(v, adapterPosition);
+                    listener.OnAdapterCandidatoClick(v, adapterPosition);
                 }
             }
         }
@@ -115,7 +114,7 @@ public class AdapterCandidato extends RecyclerView.Adapter<AdapterCandidato.View
             if (listener != null) {
                 int adapterPosition = getAdapterPosition();
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    listener.OnAdapterEstudanteClickLong(v, adapterPosition);
+                    listener.OnAdapterCandidatoClickLong(v, adapterPosition);
                 }
             }
             return false;

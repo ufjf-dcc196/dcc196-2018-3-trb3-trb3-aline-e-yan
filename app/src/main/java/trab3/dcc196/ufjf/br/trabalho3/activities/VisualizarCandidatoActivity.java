@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,11 +25,12 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
     private TextView txtCPF;
     private TextView txtProva;
     private TextView txtNomeEscola;
+    private TextView txtCod;
     private TextView txtEndereco;
     private TextView txtCidade;
     private TextView txtEstado;
     private int idCandidato;
-    private Button btnEditarEstudante;
+    private Button btnEditarCandidato;
     private Button btnVisualizarLocalizacao;
 
     @Override
@@ -46,6 +45,7 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
         txtCPF = (TextView) findViewById(R.id.txt_cpf);
         txtProva = (TextView) findViewById(R.id.txt_prova);
         txtNomeEscola = (TextView) findViewById(R.id.txt_nome_escola);
+        txtCod = (TextView) findViewById(R.id.txt_cod);
         txtEndereco = (TextView) findViewById(R.id.txt_endereco);
         txtCidade = (TextView) findViewById(R.id.txt_cidade);
         txtEstado = (TextView) findViewById(R.id.txt_estado);
@@ -56,8 +56,8 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
         txtCPF.setText(candidatoAux.getCpf());
         txtProva.setText(candidatoAux.getProva());
 
-        btnEditarEstudante = (Button) findViewById(R.id.btn_editar_estudante);
-        btnEditarEstudante.setOnClickListener(new View.OnClickListener() {
+        btnEditarCandidato = (Button) findViewById(R.id.btn_editar_candidato);
+        btnEditarCandidato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizarCandidatoActivity.this, CadastroCandidatoActivity.class);
@@ -86,10 +86,10 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
             public void onResponse(Call<Escola> call, Response<Escola> response) {
                 Escola escolaResponse = response.body();
                 txtNomeEscola.setText(escolaResponse.getNome());
+                txtCod.setText(escolaResponse.getCod());
                 txtEndereco.setText(escolaResponse.getEndereco());
                 txtCidade.setText(escolaResponse.getCidade());
                 txtEstado.setText(escolaResponse.getEstado());
-                Log.i("SERVIÇO", "Escola: " + escolaResponse.getNome());
             }
 
             @Override
@@ -97,21 +97,5 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
                 Log.i("SERVIÇO", "Falha: "+t.getMessage());
             }
         });
-//        Call<List<Escola>> escolas = escolaService.getEscolas("Fernando Lobo");
-//        escolas.enqueue(new Callback<List<Escola>>() {
-//            @Override
-//            public void onResponse(Call<List<Escola>> call, Response<List<Escola>> response) {
-//                Escola escolaResponse = response.body().get(0);
-//                Log.i("SERVIÇO", "ESCOLA: " + escolaResponse.getNome());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Escola>> call, Throwable t) {
-//                Log.i("SERVIÇO", "Falha: "+t.getMessage());
-//
-//            }
-//        });
-
-
     }
 }
