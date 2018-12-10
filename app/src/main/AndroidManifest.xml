@@ -46,7 +46,7 @@
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activities.CadastroCandidatoActivity" />
-        <activity android:name=".activities.VisualizarCandidatoActivity"></activity>
+        <activity android:name=".activities.VisualizarCandidatoActivity" />
     </application>
 
 </manifest>

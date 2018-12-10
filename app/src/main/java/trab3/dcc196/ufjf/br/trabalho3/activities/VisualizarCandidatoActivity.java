@@ -61,6 +61,8 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizarCandidatoActivity.this, CadastroCandidatoActivity.class);
+                intent.putExtra (MainActivity.ATUALIZA_CANDIDATO, true);
+                intent.putExtra(MainActivity.ID_CANDIDATO, idCandidato);
                 startActivity(intent);
             }
         });

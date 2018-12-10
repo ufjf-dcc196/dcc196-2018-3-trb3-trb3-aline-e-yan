@@ -202,7 +202,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .build();
 
         EscolaService escolaService = retrofit.create(EscolaService.class);
-        Call<Escola> escola = escolaService.getEscolaByCod("31068331");
+        Call<Escola> escola = escolaService.getEscolaByCod(
+                String.valueOf(candidatoAux.getCodEscola()));
         final double[] latitude = new double[1];
         final double[] longitude = new double[1];
         escola.enqueue(new Callback<Escola>() {

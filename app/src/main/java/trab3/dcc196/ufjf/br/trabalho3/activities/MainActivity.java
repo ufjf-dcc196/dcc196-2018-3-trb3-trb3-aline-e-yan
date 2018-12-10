@@ -13,12 +13,12 @@ import trab3.dcc196.ufjf.br.trabalho3.Banco.CandidatoDBHelper;
 import trab3.dcc196.ufjf.br.trabalho3.Persistence.CandidatoDAO;
 import trab3.dcc196.ufjf.br.trabalho3.R;
 import trab3.dcc196.ufjf.br.trabalho3.adapters.AdapterCandidato;
-import trab3.dcc196.ufjf.br.trabalho3.models.Candidato;
 
 public class MainActivity extends AppCompatActivity {
     public static final String ID_CANDIDATO = "Posição Participante";
     public static final int CADASTRO = 1;
     public static final String CANDIDATO_INDICE = "CANDIDATO_INDICE";
+    public static final String ATUALIZA_CANDIDATO = "VERIFICA QUAL JANELA CHAMOU";
     private RecyclerView rvListaCandidatosCadastrados;
     private CandidatoDBHelper dbHelper;
     private Button btnCadastrarCandidato;
@@ -39,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
         rvListaCandidatosCadastrados.setAdapter(adapterCandidato);
         rvListaCandidatosCadastrados.setLayoutManager(new LinearLayoutManager(this));
 
-        btnCadastrarCandidato = (Button) findViewById(R.id.btn_cadastrar_candidato);
+        btnCadastrarCandidato = (Button) findViewById(R.id.btn_att_cadastrar_candidato);
         btnCadastrarCandidato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CadastroCandidatoActivity.class);
+                intent.putExtra (MainActivity.ATUALIZA_CANDIDATO, false);
                 startActivityForResult(intent, CADASTRO);
             }
         });

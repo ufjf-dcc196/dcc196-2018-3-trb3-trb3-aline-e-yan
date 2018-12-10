@@ -39,7 +39,16 @@ public class CandidatoDAO {
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA,""+ candidato.getProva());
         valores.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA, candidato.getCodEscola());
         db.insert(CandidatoContract.CandidatoBD.TABLE_NAME,null, valores);
-
+    }
+    public void updateCandidato(Candidato candidato){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CandidatoContract.CandidatoBD.COLUMN_NAME_NOME,""+candidato.getNome());
+        cv.put(CandidatoContract.CandidatoBD.COLUMN_NAME_PROVA,""+candidato.getProva());
+        cv.put(CandidatoContract.CandidatoBD.COLUMN_NAME_CPF, ""+candidato.getCpf());
+        cv.put(CandidatoContract.CandidatoBD.COLUMN_NAME_ID_ESCOLA,candidato.getCodEscola());
+        db.update(CandidatoContract.CandidatoBD.TABLE_NAME,cv,
+                "_ID=?",new String[]{String.valueOf(candidato.getId())});
 
     }
 

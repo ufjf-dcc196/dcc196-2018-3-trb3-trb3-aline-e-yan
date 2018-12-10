@@ -14,12 +14,8 @@ import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,15 +41,20 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
     private EditText edtPesquisarEscola;
     private Button btnPesquisarEscola;
     private Button btnCadastrarCandidato;
-
+    private boolean verificaChamada;
     private Escola escolaEscolhida;
-
+    private int idCandidato;
     private AdapterEscola adapterEscola;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_candidato);
+        final Intent intent = getIntent();
+        Bundle bundleResult = intent.getExtras();
+        idCandidato = bundleResult.getInt(MainActivity.ID_CANDIDATO);
+        verificaChamada = bundleResult.getBoolean(MainActivity.ATUALIZA_CANDIDATO);
+
 
         dbHelper = new CandidatoDBHelper(getApplicationContext());
         edtNomeCompleto = (EditText) findViewById(R.id.edt_nome_completo);
@@ -66,6 +67,10 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
         rvListaEscolasEncontradas = (RecyclerView) findViewById(R.id.rv_lista_escolas_encontradas);
         rvListaEscolasEncontradas.setLayoutManager(new LinearLayoutManager(this));
         rvListaEscolasEncontradas.setAdapter(adapterEscola);
+        btnCadastrarCandidato = (Button) findViewById(R.id.btn_cadastrar_candidato);
+        if(verificaChamada){
+            escolaEscolhida = inicializaValores();
+        }
 
         btnPesquisarEscola.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +129,6 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
             }
         });
 
-        btnCadastrarCandidato = (Button) findViewById(R.id.btn_cadastrar_candidato);
         btnCadastrarCandidato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,11 +137,57 @@ public class CadastroCandidatoActivity extends AppCompatActivity {
                         .setCpf(edtCPF.getText().toString())
                         .setProva(edtProva.getText().toString())
                         .setCodEscola(Integer.parseInt(escolaEscolhida.getCod()));
-                CandidatoDAO.getInstance(getApplicationContext())
-                        .insercaoCandidatoBanco(candidatoAux);
-                setResult(Activity.RESULT_OK, new Intent());
+                if(verificaChamada) {
+                    CandidatoDAO.getInstance(getApplicationContext())
+                            .updateCandidato(candidatoAux);
+                    Intent intent = new Intent(CadastroCandidatoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else {
+                    CandidatoDAO.getInstance(getApplicationContext())
+                            .insercaoCandidatoBanco(candidatoAux);
+                }setResult(Activity.RESULT_OK, new Intent());
                 finish();
             }
         });
+    }
+    private Escola inicializaValores() {
+        Candidato candidatoEditavel = CandidatoDAO.
+                getInstance(getApplicationContext()).getCandidatoById(idCandidato);
+        final Escola escolaEditavel = new Escola();
+        edtNomeCompleto.setText(candidatoEditavel.getNome());
+        edtCPF.setText(candidatoEditavel.getCpf());
+        edtProva.setText(candidatoEditavel.getProva());
+        final ArrayList<Escola> escolas = new ArrayList<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://educacao.dadosabertosbr.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        EscolaService escolaService = retrofit.create(EscolaService.class);
+        Call<Escola> escola = escolaService.getEscolaByCod(String.valueOf(candidatoEditavel.getCodEscola()));
+        escola.enqueue(new Callback<Escola>() {
+            @Override
+            public void onResponse(Call<Escola> call, Response<Escola> response) {
+                Escola escolaResponse = response.body();
+                edtPesquisarEscola.setText(escolaResponse.getNome());
+                escolaEditavel.setNome(escolaResponse.getNome());
+                escolaEditavel.setCod(escolaResponse.getCod());
+                escolaEditavel.setEndereco(escolaResponse.getEndereco());
+                escolaEditavel.setCidade(escolaResponse.getNomeDistrito());
+                escolaEditavel.setEstado(escolaResponse.getSiglaUf());
+                escolas.add(escolaEditavel);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Escola> call, Throwable t) {
+                Log.i("SERVIÇO", "Falha: "+t.getMessage());
+            }
+        });
+        btnCadastrarCandidato.setText("Atualizar Candidato");
+        adapterEscola.setEscolas(escolas);
+        adapterEscola.notifyDataSetChanged();
+        return escolaEditavel;
     }
 }
