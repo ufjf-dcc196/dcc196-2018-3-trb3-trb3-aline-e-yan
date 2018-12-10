@@ -70,6 +70,7 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizarCandidatoActivity.this, MapsActivity.class);
+                intent.putExtra(MainActivity.ID_CANDIDATO, idCandidato);
                 startActivity(intent);
             }
         });

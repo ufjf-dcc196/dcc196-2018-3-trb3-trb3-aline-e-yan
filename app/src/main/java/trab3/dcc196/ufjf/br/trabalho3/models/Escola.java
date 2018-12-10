@@ -17,9 +17,9 @@ public class Escola {
     @SerializedName("estado")
     private String estado;
     @SerializedName("latitude")
-    private String latitude;
+    private Double latitude;
     @SerializedName("longitude")
-    private String longitude;
+    private Double longitude;
 
     public Escola() {
 
@@ -79,20 +79,20 @@ public class Escola {
         return this;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public Escola setLatitude(String latitude) {
+    public Escola setLatitude(Double latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public Escola setLongitude(String longitude) {
+    public Escola setLongitude(Double longitude) {
         this.longitude = longitude;
         return this;
     }
