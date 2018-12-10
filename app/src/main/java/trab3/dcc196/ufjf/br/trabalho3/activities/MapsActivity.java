@@ -81,6 +81,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String[] mLikelyPlaceAddresses;
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
+    private double[] latitude = new double[1];
+    private double[] longitude = new double[1];
 
 
     @Override
@@ -88,7 +90,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
         Bundle bundleResult = intent.getExtras();
-        idCandidato = bundleResult.getInt(MainActivity.ID_CANDIDATO);
+        latitude[0] = bundleResult.getDouble(VisualizarCandidatoActivity.ESCOLA_LATITUDE);
+        longitude[0] = bundleResult.getDouble(VisualizarCandidatoActivity.ESCOLA_LONGITUDE);
 
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
@@ -193,38 +196,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
-
-        Candidato candidatoAux = CandidatoDAO.
-                getInstance(getApplicationContext()).getCandidatoById(idCandidato);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://educacao.dadosabertosbr.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        EscolaService escolaService = retrofit.create(EscolaService.class);
-        Call<Escola> escola = escolaService.getEscolaByCod(
-                String.valueOf(candidatoAux.getCodEscola()));
-        final double[] latitude = new double[1];
-        final double[] longitude = new double[1];
-        escola.enqueue(new Callback<Escola>() {
-            @Override
-            public void onResponse(Call<Escola> call, Response<Escola> response) {
-                Escola escolaResponse = response.body();
-                latitude[0] = escolaResponse.getLatitude();
-                longitude[0] = escolaResponse.getLongitude();
-                Log.i("SERVIÇO", "Escola: " + escolaResponse.getNome());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Escola> call, @NonNull Throwable t) {
-                Log.i("SERVIÇO", "Falha: "+t.getMessage());
-            }
-        });
         LatLng localProva = new LatLng(latitude[0],
                 longitude[0]);
-        map.addMarker(new MarkerOptions().position(localProva)
-                .title("Marker na UFJF."));
-        map.moveCamera(CameraUpdateFactory.newLatLng(localProva));
+        map.addMarker(new MarkerOptions().position(localProva).title("Marker na UFJF."));
+        //map.moveCamera(CameraUpdateFactory.newLatLng(localProva));
 
 
     }

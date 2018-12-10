@@ -32,6 +32,15 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
     private int idCandidato;
     private Button btnEditarCandidato;
     private Button btnVisualizarLocalizacao;
+    private static final Escola escola = new Escola();
+
+    public static final String ESCOLA_LATITUDE = "ESCOLA_LATITUDE";
+    public static final String ESCOLA_LONGITUDE = "ESCOLA_LONGITUDE";
+
+
+    public static final Escola getEscola() {
+        return escola;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +82,9 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(VisualizarCandidatoActivity.this, MapsActivity.class);
                 intent.putExtra(MainActivity.ID_CANDIDATO, idCandidato);
+                intent.putExtra(VisualizarCandidatoActivity.ESCOLA_LATITUDE, VisualizarCandidatoActivity.getEscola().getLatitude());
+                intent.putExtra(VisualizarCandidatoActivity.ESCOLA_LONGITUDE, VisualizarCandidatoActivity.getEscola().getLongitude());
+
                 startActivity(intent);
             }
         });
@@ -83,7 +95,7 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
                 .build();
 
         EscolaService escolaService = retrofit.create(EscolaService.class);
-        Call<Escola> escola = escolaService.getEscolaByCod(String.valueOf(candidatoAux.getCodEscola()));
+        final Call<Escola> escola = escolaService.getEscolaByCod(String.valueOf(candidatoAux.getCodEscola()));
         escola.enqueue(new Callback<Escola>() {
             @Override
             public void onResponse(Call<Escola> call, Response<Escola> response) {
@@ -93,6 +105,9 @@ public class VisualizarCandidatoActivity extends AppCompatActivity {
                 txtEndereco.setText(escolaResponse.getEndereco());
                 txtCidade.setText(escolaResponse.getNomeDistrito());
                 txtEstado.setText(escolaResponse.getSiglaUf());
+                VisualizarCandidatoActivity.getEscola()
+                        .setLatitude(escolaResponse.getLatitude())
+                        .setLongitude(escolaResponse.getLongitude());
             }
 
             @Override
